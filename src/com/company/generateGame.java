@@ -41,7 +41,7 @@ public class generateGame {
             numMoves++;
             doneTurn = true;
         } else {
-            // bug notice: will still yell at you that 'the slot is occupied' if you chose a correct slot again after
+            // bug notice: will yell at you once more that 'the slot is occupied' if you chose a correct slot again after
             // you were warned the first time, but the game will still proceed as normal.
             System.out.println("\nThat slot is occupied!\n");
             doneTurn = false;
@@ -89,8 +89,4 @@ public class generateGame {
         return false;
     }
 
-    // if returns true, player 1 goes first. else, player 2 goes first
-    public boolean determineStarter() {
-        return rd.nextBoolean();
-    }
 }
