@@ -4,7 +4,6 @@ import java.util.Random;
 public class generateGame {
 
     public static char[][] board = new char[3][3];
-    private static boolean finished = false;
     String status;
     private int numMoves;
     private Random rd = new Random();
@@ -41,8 +40,6 @@ public class generateGame {
             numMoves++;
             doneTurn = true;
         } else {
-            // bug notice: will yell at you once more that 'the slot is occupied' if you chose a correct slot again after
-            // you were warned the first time, but the game will still proceed as normal.
             System.out.println("\nThat slot is occupied!\n");
             doneTurn = false;
         }

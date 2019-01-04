@@ -46,7 +46,6 @@ public class Main {
                     game.makeMove(game.board, row, column, 'O');
                 } while (!generateGame.doneTurn);
 
-                game.makeMove(game.board, row, column, 'O');
                 if (game.checkStatus(game.board)) {
                     break;
                 }
@@ -59,7 +58,7 @@ public class Main {
             int order = (int)(Math.random() * 2 + 1);
             if (order == 1) {
                 System.out.println("Human player goes first!");
-                ai1 = new AI(game.board, false);
+                ai1 = new AI(false);
 
                 game.printGame(game.board);
                 do {
@@ -90,7 +89,7 @@ public class Main {
             }
             else {
                 System.out.println("Computer goes first!");
-                ai1 = new AI(game.board, true);
+                ai1 = new AI(true);
                 game.makeMove(game.board, ai1.returnRow(), ai1.returnColumn(), 'O');
 
                 game.printGame(game.board);

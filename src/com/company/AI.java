@@ -7,7 +7,7 @@ public class AI {
     private char cplay = 'O';
     private char hplay = 'X';
 
-    public AI(char [][] board, boolean fMove) {
+    public AI(boolean fMove) {
         if (fMove) {
             returnPlace(randomCorner());
         }
