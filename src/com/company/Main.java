@@ -21,24 +21,30 @@ public class Main {
         if (option == 1) {
             while (true) {
                 game.printGame(game.board);
-                System.out.println("Player 1, please select your row.");
-                row = sc.nextInt();
+                do {
+                    System.out.println("Player 1, please select your row.");
+                    row = sc.nextInt() - 1;
 
-                System.out.println("Player 1, please select your column.");
-                column = sc.nextInt();
+                    System.out.println("Player 1, please select your column.");
+                    column = sc.nextInt() - 1;
 
-                game.makeMove(game.board, row, column, 'X');
+                    game.makeMove(game.board, row, column, 'X');
+                } while (!generateGame.doneTurn);
 
                 game.printGame(game.board);
                 if (game.checkStatus(game.board)) {
                     break;
                 }
 
-                System.out.println("Player 2, please select your row.");
-                row = sc.nextInt();
+                do {
+                    System.out.println("Player 2, please select your row.");
+                    row = sc.nextInt() - 1;
 
-                System.out.println("Player 2, please select your column.");
-                column = sc.nextInt();
+                    System.out.println("Player 2, please select your column.");
+                    column = sc.nextInt() - 1;
+
+                    game.makeMove(game.board, row, column, 'O');
+                } while (!generateGame.doneTurn);
 
                 game.makeMove(game.board, row, column, 'O');
                 if (game.checkStatus(game.board)) {
@@ -49,7 +55,81 @@ public class Main {
 
         // PLAYER VS COMPUTER
         if (option == 2) {
+            AI ai1;
+            int order = (int)(Math.random() * 2 + 1);
+            if (order == 1) {
+                System.out.println("Human player goes first!");
+                ai1 = new AI(game.board, false);
 
+                game.printGame(game.board);
+                do {
+                    System.out.println("Player 1, please select your row.");
+                    row = sc.nextInt() - 1;
+
+                    System.out.println("Player 1, please select your column.");
+                    column = sc.nextInt() - 1;
+
+                    game.makeMove(game.board, row, column, 'X');
+                } while (!generateGame.doneTurn);
+
+                ai1.AITurn(game.board);
+                game.makeMove(game.board, ai1.returnRow(), ai1.returnColumn(), 'O');
+
+                game.printGame(game.board);
+
+                do {
+                    System.out.println("Player 1, please select your row.");
+                    row = sc.nextInt() - 1;
+
+                    System.out.println("Player 1, please select your column.");
+                    column = sc.nextInt() - 1;
+
+                    game.makeMove(game.board, row, column, 'X');
+                } while (!generateGame.doneTurn);
+
+            }
+            else {
+                System.out.println("Computer goes first!");
+                ai1 = new AI(game.board, true);
+                game.makeMove(game.board, ai1.returnRow(), ai1.returnColumn(), 'O');
+
+                game.printGame(game.board);
+
+                do {
+                    System.out.println("Player 1, please select your row.");
+                    row = sc.nextInt() - 1;
+
+                    System.out.println("Player 1, please select your column.");
+                    column = sc.nextInt() - 1;
+
+                    game.makeMove(game.board, row, column, 'X');
+                } while (!generateGame.doneTurn);
+            }
+
+            while (true) {
+                ai1.AITurn(game.board);
+                game.makeMove(game.board, ai1.returnRow(), ai1.returnColumn(), 'O');
+
+                game.printGame(game.board);
+                if (game.checkStatus(game.board)) {
+                    break;
+                }
+
+                do {
+                    System.out.println("Player 1, please select your row.");
+                    row = sc.nextInt() - 1;
+
+                    System.out.println("Player 1, please select your column.");
+                    column = sc.nextInt() - 1;
+
+                    game.makeMove(game.board, row, column, 'X');
+                } while (!generateGame.doneTurn);
+
+                game.printGame(game.board);
+                if (game.checkStatus(game.board)) {
+                    break;
+                }
+            }
         }
 
         // COMPUTER VS COMPUTER

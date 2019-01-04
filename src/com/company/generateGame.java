@@ -1,11 +1,14 @@
 package com.company;
+import java.util.Random;
 
 public class generateGame {
 
-    public char[][] board = new char[3][3];
+    public static char[][] board = new char[3][3];
     private static boolean finished = false;
     String status;
     private int numMoves;
+    private Random rd = new Random();
+    static boolean doneTurn = false;
 
     public generateGame() {
         char[][] board = {
@@ -18,13 +21,17 @@ public class generateGame {
     }
 
     public void printGame(char[][] board) {
+        System.out.println("  1   2   3");
+        String pboard = "";
         for (int i = 0; i < board.length; i++) {
+            pboard = pboard + Integer.toString(i + 1) + " ";
             for (int j = 0; j < board[i].length; j++) {
-                if (j == board[i].length - 1) System.out.print(board[i][j]);
-                else System.out.print(board[i][j] + " | ");
+                if (j == board[i].length - 1) pboard = pboard + (board[i][j]);
+                else pboard = pboard + (board[i][j] + " | ");
             }
-            System.out.println();
+            pboard = pboard + "\n";
         }
+        System.out.println(pboard);
     }
 
 
@@ -32,8 +39,12 @@ public class generateGame {
         if (board[row][column] == 0) {
             board[row][column] = player;
             numMoves++;
+            doneTurn = true;
         } else {
-            System.out.println("\nThat slot is occupied!");
+            // bug notice: will still yell at you that 'the slot is occupied' if you chose a correct slot again after
+            // you were warned the first time, but the game will still proceed as normal.
+            System.out.println("\nThat slot is occupied!\n");
+            doneTurn = false;
         }
     }
 
@@ -76,5 +87,10 @@ public class generateGame {
         }
 
         return false;
+    }
+
+    // if returns true, player 1 goes first. else, player 2 goes first
+    public boolean determineStarter() {
+        return rd.nextBoolean();
     }
 }
